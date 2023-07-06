@@ -1,5 +1,12 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 
+import OffersPage from "../pages/offers-page/offers-page.component";
+import OfferPage from "../pages/offer-page/offer-page.component";
+import LoginPage from "../pages/login-page/login-page.component";
+import NotFoundPage from "../pages/not-found-page/not-found-page.component";
+import AccountPage from "../pages/account-page/account-page.component";
+import CreateOfferPage from "../pages/create-offer-page/create-offer-page.component";
+
 import "./app.module.scss";
 
 const App = () => {
@@ -7,14 +14,14 @@ const App = () => {
     <Routes>
       <Route path="/">
         {/* Routes available for non-authorized users */}
-        <Route path="offers" />
-        <Route path="offer/:offerId" />
-        <Route path="login" />
-        <Route path="not-found" />
+        <Route path="offers" element={<OffersPage />} />
+        <Route path="offer/:offerId" element={<OfferPage />} />
+        <Route path="login" element={<LoginPage />} />
+        <Route path="not-found" element={<NotFoundPage />} />
 
         {/* Routes available to authorize users */}
-        <Route path="account" />
-        <Route path="create-offer" />
+        <Route path="account" element={<AccountPage />} />
+        <Route path="create-offer" element={<CreateOfferPage />} />
 
         {/* Redirects */}
         <Route path="" element={<Navigate to="/offers" replace />} />
