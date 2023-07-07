@@ -24,10 +24,6 @@
       width: 100%;
     }
   }
-
-  &__account {
-    margin-left: auto;
-  }
 }
 
 .logo {
@@ -61,16 +57,74 @@
     &:not(:last-of-type) {
       margin-right: 20px;
     }
+
+    @media screen and (max-width: 600px) {
+      margin: 10px 0;
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    flex-direction: column;
+    align-items: flex-start;
+
+    position: fixed;
+    z-index: 1;
+
+    right: -100%;
+    top: 50px;
+    gap: 0;
+
+    width: 240px;
+    height: 100%;
+
+    background-color: lighten($color: #c4c9ce, $amount: 13%);
+
+    padding-left: 10px;
+
+    text-align: left;
+
+    transition: 0.3s;
+
+    &_active {
+      right: 0px;
+    }
   }
 }
 
-.account {
-  display: flex;
-  align-items: center;
+.hamburger {
+  cursor: pointer;
 
-  font-size: 24px;
+  display: none;
 
-  color: black;
+  @media screen and (max-width: 600px) {
+    display: block;
+  }
 
-  text-decoration: none;
+  &_active {
+    .bar:nth-child(1) {
+      transform: translateY(8px) rotate(45deg);
+    }
+
+    .bar:nth-child(2) {
+      opacity: 0;
+    }
+
+    .bar:nth-child(3) {
+      transform: translateY(-8px) rotate(-45deg);
+    }
+  }
+
+  .bar {
+    display: block;
+
+    width: 25px;
+    height: 3px;
+
+    margin: 5px auto;
+
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+
+    background-color: black;
+  }
 }
