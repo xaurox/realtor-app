@@ -6,6 +6,8 @@ import { storage } from "../../utils/firebase/firebase";
 
 import { OfferCardProps } from "./offer-card.types";
 
+import background from "../../assets/home-background.png";
+
 import styles from "./offer-card.module.scss";
 
 const {
@@ -41,7 +43,7 @@ const OfferCard: React.FC<OfferCardProps> = (props) => {
   return (
     <div className={offerCard}>
       <div className={offerCard__image}>
-        <img src={url} alt="house photo" />
+        <img src={url || background} alt="house photo" />
       </div>
       <div className={`${offerCard__description} ${description}`}>
         <div className={description__type}>{type}</div>
