@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useReducer } from "react";
 
-import { ref, uploadBytes } from "firebase/storage";
+import { ref as refStorage, uploadBytes } from "firebase/storage";
+import { ref as refDatabase, set } from "firebase/database";
 
-import { storage } from "../../utils/firebase/firebase";
+import { storage, database } from "../../utils/firebase/firebase";
 
 import { INPUT_TYPES } from "../../constants/input-type.constants";
 import { PROPERTY_TYPES } from "../../constants/property-types.constants";
@@ -119,11 +120,44 @@ const CreateOfferForm: React.FC = () => {
     };
   }, [files]);
 
+  const reset = () => {
+    setPropertyType(PROPERTY_TYPES[0]);
+    setAddress("");
+    setNumberOfRooms(1);
+    setArea(1);
+    setPrice(1);
+    setDescription("");
+
+    dispatch("reset");
+
+    setFiles({ length: 0 } as FileList);
+    setImages([]);
+  };
+
+  const writeOfferData = async () => {
+    const offerId = Date.now().toString();
+
+    const photos = [];
+    for (let i = 0; i < files.length; i++) {
+      photos.push(files[i].name);
+    }
+
+    await set(refDatabase(database, "offers/" + offerId), {
+      propertyType,
+      address,
+      numberOfRooms,
+      area,
+      price,
+      description,
+      photos,
+    });
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
     for (let i = 0; i < files.length; i++) {
-      const storageRef = ref(storage, `images/${files[i].name}`);
+      const storageRef = refStorage(storage, `images/${files[i].name}`);
 
       uploadBytes(storageRef, files[i])
         .then(() => {
@@ -133,6 +167,16 @@ const CreateOfferForm: React.FC = () => {
           console.log(error);
         });
     }
+
+    writeOfferData()
+      .then(() => {
+        console.log("Data uploaded");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    reset();
   };
 
   return (
@@ -200,7 +244,7 @@ const CreateOfferForm: React.FC = () => {
           name="description"
           labelText={`${propertyType} description:`}
           value={description}
-          handleChange={handleTextChange(setDescription)}
+          handleChange={setDescription}
         />
 
         <FileInput
