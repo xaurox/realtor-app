@@ -4,13 +4,14 @@ import { get, child, ref } from "firebase/database";
 
 import { database } from "../../utils/firebase/firebase";
 
+import Header from "../../components/header/header.component";
 import OfferCard from "../../layouts/offer-card/offer-card.component";
 
 import { transformRawData } from "../../utils/firebase/get-offers";
 
 import styles from "./offers-page.module.scss";
 
-const { offersPage__container } = styles;
+const { offersPage, offersPage__container } = styles;
 
 export interface OfferInfo {
   address: string;
@@ -51,20 +52,23 @@ const OffersPage = () => {
   }, []);
 
   return (
-    <div className={offersPage__container}>
-      {offersData.map((offer: OfferType, index) => {
-        const { id, price, address, propertyType, photos } = offer.offerInfo;
+    <div className={offersPage}>
+      <Header />
+      <div className={offersPage__container}>
+        {offersData.map((offer: OfferType, index) => {
+          const { price, address, propertyType, photos } = offer.offerInfo;
 
-        return (
-          <OfferCard
-            key={index}
-            price={price}
-            address={address}
-            type={propertyType}
-            image={photos[0]}
-          />
-        );
-      })}
+          return (
+            <OfferCard
+              key={index}
+              price={price}
+              address={address}
+              type={propertyType}
+              image={photos[0]}
+            />
+          );
+        })}
+      </div>
     </div>
   );
 };

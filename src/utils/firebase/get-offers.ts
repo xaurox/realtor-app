@@ -1,7 +1,3 @@
-import { ref, child, get } from "firebase/database";
-
-import { database } from "./firebase";
-
 import {
   OfferInfo,
   OfferType,
