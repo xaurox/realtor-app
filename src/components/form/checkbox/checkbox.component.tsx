@@ -15,7 +15,7 @@ const Checkbox: React.FC<CheckboxProps> = (props) => {
       <p className={checkbox__label}>{labelText}</p>
       {Object.keys(checkboxOptions).map((option) => {
         return (
-          <div key={option} className={checkbox__option}>
+          <div key={option} className={checkbox__option} data-testid="option">
             <input
               id={option}
               name={option}

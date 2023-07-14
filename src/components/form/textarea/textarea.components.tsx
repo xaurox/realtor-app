@@ -9,10 +9,6 @@ const { textarea, textarea__container, textarea__label } = styles;
 const Textarea: React.FC<TextareaType> = (props) => {
   const { id, name, labelText, value, handleChange } = props;
 
-  const textareaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    handleChange(e.target.value);
-  };
-
   return (
     <div className={textarea__container}>
       <label htmlFor={id} className={textarea__label}>
@@ -23,7 +19,7 @@ const Textarea: React.FC<TextareaType> = (props) => {
         name={name}
         className={textarea}
         value={value}
-        onChange={textareaChange}
+        onChange={handleChange}
         rows={8}
       ></textarea>
     </div>

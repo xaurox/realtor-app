@@ -28,6 +28,8 @@ const FileInput: React.FC<FileInputProps> = (props) => {
     images,
   } = props;
 
+  console.log(files);
+
   return (
     <div className={fileInput__container}>
       <div className={input__container}>
@@ -46,12 +48,16 @@ const FileInput: React.FC<FileInputProps> = (props) => {
         />
       </div>
       {files.length ? (
-        <div className={files__container}>
+        <div className={files__container} data-testid="files-container">
           <p className={files__label}>Uploaded photos:</p>
           <div className={files__list}>
             {images.map((image, index) => {
               return (
-                <div key={index} className={files__item}>
+                <div
+                  key={index}
+                  className={files__item}
+                  data-testid="image-container"
+                >
                   <img src={image} alt={files[index].name} />
                 </div>
               );
