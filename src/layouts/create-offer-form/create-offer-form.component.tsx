@@ -61,6 +61,10 @@ const CreateOfferForm: React.FC = () => {
     setPropertyType(e.currentTarget.value);
   };
 
+  const handleTextareaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setDescription(e.target.value);
+  };
+
   const handleTextChange =
     (setState: React.Dispatch<React.SetStateAction<string>>) =>
     (e: React.FormEvent<HTMLInputElement>) => {
@@ -248,7 +252,7 @@ const CreateOfferForm: React.FC = () => {
           name="description"
           labelText={`${propertyType} description:`}
           value={description}
-          handleChange={setDescription}
+          handleChange={handleTextareaChange}
         />
 
         <FileInput

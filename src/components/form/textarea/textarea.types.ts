@@ -3,5 +3,5 @@ export interface TextareaType {
   name: string;
   labelText: string;
   value: string;
-  handleChange: React.Dispatch<React.SetStateAction<string>>;
+  handleChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
 }
