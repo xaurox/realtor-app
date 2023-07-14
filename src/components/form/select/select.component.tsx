@@ -9,10 +9,6 @@ const { select, select__container, select__label, select__option } = styles;
 const Select: React.FC<SelectType> = (props) => {
   const { id, name, options, labelText, value, handleChange } = props;
 
-  const selectValueChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    handleChange(e.target.value);
-  };
-
   return (
     <div className={select__container}>
       <label htmlFor={id} className={select__label}>
@@ -23,7 +19,7 @@ const Select: React.FC<SelectType> = (props) => {
         id={id}
         className={select}
         value={value}
-        onChange={selectValueChange}
+        onChange={handleChange}
       >
         {options.map((option) => {
           return (
@@ -32,6 +28,7 @@ const Select: React.FC<SelectType> = (props) => {
               value={option}
               label={option}
               className={select__option}
+              data-testid="option"
             >
               {option}
             </option>

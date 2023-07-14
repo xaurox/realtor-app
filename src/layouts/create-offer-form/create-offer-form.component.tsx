@@ -57,6 +57,10 @@ const CreateOfferForm: React.FC = () => {
     dispatch(option);
   };
 
+  const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setPropertyType(e.currentTarget.value);
+  };
+
   const handleTextChange =
     (setState: React.Dispatch<React.SetStateAction<string>>) =>
     (e: React.FormEvent<HTMLInputElement>) => {
@@ -189,7 +193,7 @@ const CreateOfferForm: React.FC = () => {
           options={PROPERTY_TYPES}
           labelText="Property type:"
           value={propertyType}
-          handleChange={setPropertyType}
+          handleChange={handleSelectChange}
         />
 
         <Input

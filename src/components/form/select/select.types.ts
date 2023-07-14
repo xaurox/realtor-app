@@ -4,5 +4,5 @@ export interface SelectType {
   options: string[];
   labelText: string;
   value: string;
-  handleChange: (arg: string) => void;
+  handleChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 }
