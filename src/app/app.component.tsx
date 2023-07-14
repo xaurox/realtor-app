@@ -1,4 +1,7 @@
+import { useContext, useEffect } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
+
+import { NbrbContext } from "../contexts/nbrb.context";
 
 import OffersPage from "../pages/offers-page/offers-page.component";
 import OfferPage from "../pages/offer-page/offer-page.component";
@@ -7,9 +10,35 @@ import NotFoundPage from "../pages/not-found-page/not-found-page.component";
 import AccountPage from "../pages/account-page/account-page.component";
 import CreateOfferPage from "../pages/create-offer-page/create-offer-page.component";
 
+import { getCurrencies, getTodaysRates } from "../utils/nbrb/nbrb";
+
 import "./app.module.scss";
 
 const App = () => {
+  const { setRates, setCurrencies } = useContext(NbrbContext);
+
+  useEffect(() => {
+    console.log("rates");
+
+    getTodaysRates()
+      .then((data) => setRates(data))
+      .catch((error) => {
+        console.error(error);
+        setRates([]);
+      });
+  }, []);
+
+  useEffect(() => {
+    console.log("currencies");
+
+    getCurrencies()
+      .then((data) => setCurrencies(data))
+      .catch((error) => {
+        console.error(error);
+        setCurrencies([]);
+      });
+  }, []);
+
   return (
     <Routes>
       <Route path="/">
