@@ -56,10 +56,12 @@ const OffersPage = () => {
       <Header />
       <div className={offersPage__container}>
         {offersData.map((offer: OfferType, index) => {
+          const { id } = offer;
           const { price, address, propertyType, photos } = offer.offerInfo;
 
           return (
             <OfferCard
+              id={id}
               key={index}
               price={price}
               address={address}

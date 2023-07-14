@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { ref, getDownloadURL } from "firebase/storage";
 
@@ -26,9 +27,17 @@ const {
 } = styles;
 
 const OfferCard: React.FC<OfferCardProps> = (props) => {
-  const { image, type, price, address } = props;
+  const { id, image, type, price, address } = props;
+
+  const navigate = useNavigate();
 
   const [url, setUrl] = useState("");
+
+  const offerCardRedirect = () => {
+    navigate(`/offer/${id}`, {
+      replace: true,
+    });
+  };
 
   useEffect(() => {
     getDownloadURL(ref(storage, `images/${image}`))
@@ -41,7 +50,7 @@ const OfferCard: React.FC<OfferCardProps> = (props) => {
   }, []);
 
   return (
-    <div className={offerCard}>
+    <div className={offerCard} onClick={offerCardRedirect}>
       <div className={offerCard__image}>
         <img src={url || background} alt="house photo" />
       </div>

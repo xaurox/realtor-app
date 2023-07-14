@@ -4,4 +4,14 @@
 
   margin: 0 auto;
   padding: 10px;
+
+  &__photos {
+    display: grid;
+    grid-template-columns: repeat(4, auto);
+    gap: 20px;
+
+    .photo > img {
+      width: 100%;
+    }
+  }
 }
